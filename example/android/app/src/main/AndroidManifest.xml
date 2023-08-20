@@ -1,0 +1,62 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hu.popoapps.watchface_config_example">
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-feature android:name="android.hardware.type.watch" />
+
+   <application
+        android:label="watchface_config_example"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+       <service
+           android:name=".watchface.WatchFaceExample"
+           android:exported="true"
+           android:label="Settings example"
+           android:permission="android.permission.BIND_WALLPAPER">
+
+           <meta-data
+               android:name="android.service.wallpaper.square_mode"
+               android:value="false" />
+           <meta-data
+               android:name="android.service.wallpaper"
+               android:resource="@xml/watch_face" />
+           <meta-data
+               android:name="com.google.android.wearable.watchface.preview"
+               android:resource="@drawable/face" />
+           <meta-data
+               android:name="com.google.android.wearable.watchface.preview_circular"
+               android:resource="@drawable/face" />
+
+           <meta-data
+               android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
+               android:value="CONFIG_ACTIVITY"/>
+
+           <intent-filter>
+               <action android:name="android.service.wallpaper.WallpaperService" />
+
+               <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
+           </intent-filter>
+       </service>
+       <!-- This activity is for testing purposes, real application does not require it-->
+               <activity
+                   android:name=".MainActivity"
+                   android:exported="true"
+                   android:launchMode="singleTop"
+                   android:theme="@style/LaunchTheme"
+                   android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+                   android:hardwareAccelerated="true"
+                   android:windowSoftInputMode="adjustResize">
+                   <meta-data
+                     android:name="io.flutter.embedding.android.NormalTheme"
+                     android:resource="@style/NormalTheme"
+                     />
+                   <intent-filter>
+                       <action android:name="android.intent.action.MAIN"/>
+                       <category android:name="android.intent.category.LAUNCHER"/>
+                   </intent-filter>
+               </activity>
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+</manifest>
